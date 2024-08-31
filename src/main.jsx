@@ -8,7 +8,7 @@ import {
   RouterProvider,
 } from "@tanstack/react-router";
 import NavigationHeader from "./components/NavigationHeader.jsx"; // Correct import path
-import { homeRoute } from "./components/HOME.JSX"; // Correct import path
+import { homeRoute } from "./components/Home.jsx"; // Correct import path
 import { heroRoute } from "./components/Hero.jsx";
 import { signUpRoute } from "./components/SignUp.jsx";
 import "../src/index.css";

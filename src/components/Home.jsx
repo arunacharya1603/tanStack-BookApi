@@ -7,7 +7,7 @@ import Search from "./Search";
 import Filter from "./Filter";
 
 
-const HOME = () => {
+const Home = () => {
   const [page, setPage] = useState(0);
   const [searchQuery, setSearchQuery] = useState(""); // Start with page 0 for the first set of results
   const [selectedYear, setSelectedYear] = useState("");
@@ -106,7 +106,7 @@ const HOME = () => {
 export const homeRoute = createRoute({
   getParentRoute: () => rootRoute, // Correcting the getParentRoute to return the root route
   path: "/",
-  component: HOME,
+  component: Home,
 });
 
-export default HOME;
+export default Home;
