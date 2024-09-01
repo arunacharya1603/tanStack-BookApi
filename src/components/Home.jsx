@@ -13,7 +13,12 @@ const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
 
-  const { favorites, addFavorite, removeFavorite, isFavorite } = useFavorites();
+  const { data: favorites, addFavorite, removeFavorite, isFavorite } = useFavorites({
+    refetchOnWindowFocus: false,
+    keepPreviousData: true,
+    staleTime: 5 * 60 * 1000,
+    cacheTime: 10 * 60 * 1000,
+  });
 
   const { isLoading, error, data, isFetching, isPlaceholderData } = useQuery({
     queryKey: ["query", { page, searchQuery, selectedYear }],
