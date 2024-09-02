@@ -10,7 +10,6 @@ import {
 import NavigationHeader from "./components/NavigationHeader.jsx"; // Correct import path
 import { homeRoute } from "./components/Home.jsx"; // Correct import path
 import { heroRoute } from "./components/Hero.jsx";
-import { signUpRoute } from "./components/SignUp.jsx";
 import "../src/index.css";
 // import App from "./App.jsx";
 
@@ -21,18 +20,23 @@ const queryClient = new QueryClient({
       refetchOnWindowFocus: false, // default: true
     },
   },
-})
+});
 
 // Create the root route
 export const rootRoute = createRootRoute({
   component: NavigationHeader,
+  
 });
 
 // Create the router instance
-const rootTree = rootRoute.addChildren([homeRoute, heroRoute, signUpRoute]);
+const rootTree = rootRoute.addChildren([
+  homeRoute,
+  heroRoute,
+]);
 
 const router = createRouter({
   routeTree: rootTree,
+  defaultNotFoundComponent: () => <div>Custom Not Found Message</div>,
 });
 
 // Render the app
@@ -43,9 +47,8 @@ if (rootElement) {
   root.render(
     <StrictMode>
       <QueryClientProvider client={queryClient}>
-        
         <RouterProvider router={router} />
-      
+
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </StrictMode>

@@ -1,11 +1,11 @@
-import React, { useState, useMemo } from "react";
-import { createRoute } from "@tanstack/react-router";
+import { createRoute, Link } from "@tanstack/react-router";
 import { rootRoute } from "../main";
 import fetchUser from "../tankStack/userApi";
 import { useQuery } from "@tanstack/react-query";
 import Search from "./Search";
 import Filter from "./Filter";
 import FavoriteButton from "./FavoriteButton";
+import { useState, useMemo } from "react";
 
 // Utility function to fetch favorites from local storage
 const fetchFavoritesFromLocalStorage = () => {
@@ -58,6 +58,7 @@ const Home = () => {
   });
 
   const items = data?.items || [];
+  console.log(items);
   const hasMore = data?.hasMore || false;
 
   const handleNextPage = () => {
@@ -93,14 +94,40 @@ const Home = () => {
                   key={item.id}
                   className="h-full w-full border flex flex-col justify-between p-4 bg-slate-200 rounded-md cursor-pointer shadow-lg transition-transform duration-300 ease-in-out transform hover:shadow-cyan-900"
                 >
-                  <div className="border rounded-md text-blue-950">
+                  <div className="text-xl font-semibold text-gray-800">
                     {item.volumeInfo.title}
                   </div>
-                  <div>
+
+                  <div className="text-gray-600">
                     {item.volumeInfo.authors
                       ? item.volumeInfo.authors.join(", ")
                       : "Unknown Author"}
                   </div>
+
+                  <div className="text-gray-500">
+                    {item.volumeInfo.publishedDate
+                      ? item.volumeInfo.publishedDate
+                      : "Unknown Date"}
+                  </div>
+
+                  <div className="text-gray-500">
+                    {item.volumeInfo.categories
+                      ? item.volumeInfo.categories.join(", ")
+                      : "Unknown Category"}
+                  </div>
+
+                  <div className="text-gray-500">
+                    {item.volumeInfo.pageCount
+                      ? `${item.volumeInfo.pageCount} pages`
+                      : "Unknown Page Count"}
+                  </div>
+
+                  <div className="text-gray-500">
+                    {item.volumeInfo.averageRating
+                      ? `Rating: ${item.volumeInfo.averageRating}`
+                      : "No Rating"}
+                  </div>
+
                   <FavoriteButton
                     isFavorite={isFavorite(item.id)}
                     onAdd={() => addFavorite(item)}
